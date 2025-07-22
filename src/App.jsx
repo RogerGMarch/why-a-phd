@@ -218,51 +218,7 @@ function App() {
             </div>
           </div>
 
-          <div className="question">
-            <button 
-              className="question-header"
-              onClick={() => toggleQuestion('financial')}
-            >
-              <h2>What about the financial aspect?</h2>
-              <span className={`question-toggle ${expandedQuestions['financial'] ? 'expanded' : ''}`}>
-                ▼
-              </span>
-            </button>
-            <div className={`question-content ${expandedQuestions['financial'] ? 'expanded' : 'collapsed'}`}>
-              <p>
-                This is probably the most practical question, and I'm glad people ask it. A PhD doesn't have to mean being broke for 4-6 years.
-              </p>
-              <p>
-                In computational data science, there are <strong>funded positions</strong>, industry collaborations, and consulting opportunities that can make a PhD financially viable. I've seen colleagues who managed to maintain a decent income while pursuing their research.
-              </p>
-              <p>
-                Plus, my current experience gives me leverage to negotiate better conditions or find hybrid arrangements that combine research with practical applications.
-              </p>
-            </div>
-          </div>
 
-          <div className="question">
-            <button 
-              className="question-header"
-              onClick={() => toggleQuestion('career')}
-            >
-              <h2>Won't this limit your career options?</h2>
-              <span className={`question-toggle ${expandedQuestions['career'] ? 'expanded' : ''}`}>
-                ▼
-              </span>
-            </button>
-            <div className={`question-content ${expandedQuestions['career'] ? 'expanded' : 'collapsed'}`}>
-              <p>
-                Actually, I think it will <strong>expand</strong> them. A PhD in computational data science opens doors in academia, industry research labs, consulting, and tech companies.
-              </p>
-              <p>
-                The deep expertise and research skills you develop are valuable in many contexts—from leading R&D teams to founding tech startups to becoming a subject matter expert in specialized domains.
-              </p>
-              <p>
-                It's not about limiting options; it's about gaining the credibility and expertise to work on the most interesting and impactful problems.
-              </p>
-            </div>
-          </div>
         </div>
       </main>
 
