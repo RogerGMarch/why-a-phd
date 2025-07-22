@@ -1,0 +1,371 @@
+/* Obsidian/Notion style - clean document feel */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #ffffff;
+  min-height: 100vh;
+  padding: 4rem 2rem 2rem 2rem;
+}
+
+.content {
+  margin-bottom: 4rem;
+}
+
+/* Header section with centered title and aligned elements */
+.header-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+  gap: 2rem;
+  position: relative;
+  min-height: 400px; /* Ensure enough space for absolutely positioned elements */
+  padding-bottom: 2rem;
+}
+
+/* Centered title */
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2e3338;
+  margin: 0;
+  line-height: 1.2;
+  text-align: center;
+  width: 100%;
+}
+
+.title-and-card {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Header section with author card and GIF */
+.header-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  margin-bottom: 0rem;
+  position: relative;
+  padding: 0;
+  min-height: auto;
+}
+
+/* Author card - centered under title */
+.author-card {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 1.5rem;
+  min-width: 280px;
+  max-width: 300px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.author-card h3 {
+  color: #2e3338;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.author-card .author-subtitle {
+  color: #656d76;
+  margin: 0 0 0.3rem 0;
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.author-card .author-location {
+  color: #8b949e;
+  margin: 0 0 1rem 0;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.social-links-compact {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  color: #656d76;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.social-icon:hover {
+  background: #f3f4f6;
+  border-color: #8b949e;
+  color: #2e3338;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.social-icon svg {
+  flex-shrink: 0;
+}
+
+/* GIF section - centered under author card by default */
+.gif-section {
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: -1rem;
+}
+
+.gif-section .tenor-gif-embed {
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+/* For larger screens - side by side layout */
+@media (min-width: 768px) {
+  .header-section {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 3rem;
+    max-width: 800px;
+    margin: 3rem auto 0rem auto;
+  }
+  
+  .gif-section {
+    order: -1; /* Move GIF to the left */
+    max-width: 300px;
+    flex-shrink: 0;
+  }
+  
+  .author-card {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+}
+
+.gif-section a {
+  font-size: 0.75rem;
+  color: #8b949e;
+  text-decoration: none;
+}
+
+.gif-section a:hover {
+  color: #656d76;
+  text-decoration: underline;
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #2e3338;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2e3338;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1.2rem;
+  color: #2e3338;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Emphasis styling */
+strong {
+  color: #2e3338;
+  font-weight: 600;
+}
+
+em {
+  color: #656d76;
+  font-style: italic;
+}
+
+/* Clean intro section - no background */
+.intro {
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+.questions {
+  margin-top: 2rem;
+}
+
+/* Minimal question styling */
+.question {
+  margin-bottom: 2.5rem;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.question-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  transition: opacity 0.2s ease;
+}
+
+.question-header:hover {
+  opacity: 0.7;
+}
+
+.question-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #2e3338;
+  font-weight: 600;
+}
+
+.question-toggle {
+  font-size: 0.9rem;
+  color: #8b949e;
+  transition: transform 0.3s ease;
+  margin-left: 1rem;
+}
+
+.question-toggle.expanded {
+  transform: rotate(180deg);
+}
+
+.question-content {
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  padding-left: 0;
+}
+
+.question-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+}
+
+.question-content.expanded {
+  max-height: 600px;
+  opacity: 1;
+  padding-top: 1rem;
+}
+
+/* Simplified footer */
+.footer {
+  margin-top: 4rem;
+  padding: 2rem 0;
+  border-top: 1px solid #e1e7eb;
+  background: none;
+  text-align: center;
+}
+
+.contact-card {
+  background: none;
+  padding: 0;
+}
+
+.contact-card p {
+  color: #656d76;
+  margin: 0;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem 1.5rem;
+  }
+  
+  .header-section {
+    gap: 1.5rem;
+    min-height: auto;
+    padding-bottom: 0;
+  }
+  
+  .title-and-card {
+    flex-direction: column;
+    align-items: center;
+    position: static;
+  }
+  
+  .author-card {
+    position: static;
+    min-width: auto;
+    max-width: none;
+    width: 100%;
+    margin-top: 2rem;
+  }
+  
+  .gif-section {
+    position: static;
+    margin: 2rem auto 0 auto;
+    max-width: 100%;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .question-header h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+  
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+  }
+  
+  .author-card {
+    padding: 1rem;
+  }
+  
+  .social-links-compact {
+    gap: 0.4rem;
+  }
+  
+  .social-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
