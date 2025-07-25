@@ -90,10 +90,6 @@ You can deploy this site for free using [Vercel](https://vercel.com/), which int
 
 Feel free to fork this project and adapt it for your own PhD journey or research group. Pull requests are welcome!
 
-## License
-
-MIT
-
 ---
 
 **Inspire others by sharing your story!**
