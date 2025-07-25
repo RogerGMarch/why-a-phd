@@ -1,6 +1,6 @@
 # Isn't it too late to start a PhD now?
 
-Yes, it *seems* like I'm starting a PhD too late—but actually, this is the **right moment** for me.
+No, this is the **right moment** for me.
 
 Starting a PhD right after finishing my degree (and master's) would have been a mistake. Back then, I lacked perspective and mature work habits. I completed my degree without proper planning, and in physics, the curriculum wasn't really project- or long-term-oriented.
 
