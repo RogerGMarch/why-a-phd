@@ -1,8 +1,36 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import { marked } from 'marked'
+
+// Helper to import all markdown files in src/questions
+function useQuestions() {
+  const [questions, setQuestions] = useState([])
+
+  useEffect(() => {
+    // Vite's import.meta.glob for dynamic imports
+    const files = import.meta.glob('./questions/*.md', { as: 'raw' })
+    const loadQuestions = async () => {
+      const entries = await Promise.all(
+        Object.entries(files).map(async ([path, loader]) => {
+          const raw = await loader()
+          // Extract first line as question, rest as answer
+          const [first, ...rest] = raw.split('\n')
+          const question = first.replace(/^# /, '').trim()
+          const answer = rest.join('\n').trim()
+          return { id: path.split('/').pop().replace('.md',''), question, answer }
+        })
+      )
+      setQuestions(entries)
+    }
+    loadQuestions()
+  }, [])
+
+  return questions
+}
 
 function App() {
   const [expandedQuestions, setExpandedQuestions] = useState({})
+  const questions = useQuestions()
 
   const toggleQuestion = (questionId) => {
     setExpandedQuestions(prev => ({
@@ -103,122 +131,20 @@ function App() {
         </div>
 
         <div className="questions">
-          <div className="question">
-            <button 
-              className="question-header"
-              onClick={() => toggleQuestion('timing')}
-            >
-              <h2>Isn't it too late to start a PhD now?</h2>
-              <span className={`question-toggle ${expandedQuestions['timing'] ? 'expanded' : ''}`}>
-                ▼
-              </span>
-            </button>
-            <div className={`question-content ${expandedQuestions['timing'] ? 'expanded' : 'collapsed'}`}>
-              <p>
-                Yes, it <em>seems</em> like I'm starting a PhD too late—but actually, this is the <strong>right moment</strong> for me.
-              </p>
-              <p>
-                Starting a PhD right after finishing my degree (and master's) would have been a mistake. Back then, I lacked perspective and mature work habits. I completed my degree without proper planning, and in physics, the curriculum wasn't really project- or long-term-oriented.
-              </p>
-              <p>
-                I'm glad I worked in the private sector first—it helped me discover what I enjoy and what I absolutely don't. That experience taught me how to manage projects independently, how to lead, communicate with clients, understand salary structures, and negotiate. These are <strong>essential skills</strong> in academia, even though many people in that world tend to overlook them.
-              </p>
-              <p>
-                Getting a taste of all that before starting a PhD has given me the confidence to handle a long-term project and, more importantly, a clear sense of how—and where—I <strong>don't</strong> want to work.
-              </p>
+          {questions.map(q => (
+            <div className="question" key={q.id}>
+              <button 
+                className="question-header"
+                onClick={() => toggleQuestion(q.id)}
+              >
+                <h2>{q.question}</h2>
+                <span className={`question-toggle ${expandedQuestions[q.id] ? 'expanded' : ''}`}>▼</span>
+              </button>
+              <div className={`question-content ${expandedQuestions[q.id] ? 'expanded' : 'collapsed'}`}
+                dangerouslySetInnerHTML={{ __html: marked.parse(q.answer) }}
+              />
             </div>
-          </div>
-
-          <div className="question">
-            <button 
-              className="question-header"
-              onClick={() => toggleQuestion('competitive')}
-            >
-              <h2>Aren't academic careers extremely competitive and unstable?</h2>
-              <span className={`question-toggle ${expandedQuestions['competitive'] ? 'expanded' : ''}`}>
-                ▼
-              </span>
-            </button>
-            <div className={`question-content ${expandedQuestions['competitive'] ? 'expanded' : 'collapsed'}`}>
-              <p>
-                Yes, those doubts are real—and I share them. I <em>am</em> worried about what will happen after the PhD, or even whether I'll finish it. I haven't fully decided if I want to pursue the traditional academic path, with all the postdocs and uncertainty it involves.
-              </p>
-              <p>
-                But doing a PhD doesn't mean I'm committing to that one path. It doesn't mean I'll spend my 30s chasing academic positions and regretting not having built a more stable or fulfilling life.
-              </p>
-              <p>
-                The truth is, I also see myself as part-developer, part-builder. I enjoy creating my own projects, and I'm genuinely drawn to the idea of starting something—maybe a business, maybe something different—after the PhD. That, too, is a door this journey can open.
-              </p>
-            </div>
-          </div>
-
-          <div className="question">
-            <button 
-              className="question-header"
-              onClick={() => toggleQuestion('papers')}
-            >
-              <h2>Isn't research mostly just writing papers nobody reads?</h2>
-              <span className={`question-toggle ${expandedQuestions['papers'] ? 'expanded' : ''}`}>
-                ▼
-              </span>
-            </button>
-            <div className={`question-content ${expandedQuestions['papers'] ? 'expanded' : 'collapsed'}`}>
-              <p>
-                Sí.
-              </p>
-            </div>
-          </div>
-
-          <div className="question">
-            <button 
-              className="question-header"
-              onClick={() => toggleQuestion('difference')}
-            >
-              <h2>You already do research—what's the difference with a PhD?</h2>
-              <span className={`question-toggle ${expandedQuestions['difference'] ? 'expanded' : ''}`}>
-                ▼
-              </span>
-            </button>
-            <div className={`question-content ${expandedQuestions['difference'] ? 'expanded' : 'collapsed'}`}>
-              <p>
-                The main difference is that during a PhD, I'll be curating the research we're doing and making it <em>publishable</em>—so that others can benefit from it, not just the immediate team or project. Publishing is also a powerful way to position yourself, to demonstrate what you can do, and to build credibility in your field.
-              </p>
-              <p>
-                You'd be surprised by how much can change in your life just by adding a new <em>node</em> to a network. I see publishing not just as an academic obligation, but as a way to create bridges—connections to communities I wouldn't otherwise have access to.
-              </p>
-              <p>
-                What I feel is often missing in a regular job or research engineer position is that deeper sense of <em>belonging to a community</em>. While research can be competitive, especially in academia, it's also deeply collaborative and intersectional—at least in the field I plan to pursue. And that's something I truly value.
-              </p>
-            </div>
-          </div>
-
-          <div className="question">
-            <button 
-              className="question-header"
-              onClick={() => toggleQuestion('worth')}
-            >
-              <h2>Is this really worth 3–5 more years of your life?</h2>
-              <span className={`question-toggle ${expandedQuestions['worth'] ? 'expanded' : ''}`}>
-                ▼
-              </span>
-            </button>
-            <div className={`question-content ${expandedQuestions['worth'] ? 'expanded' : 'collapsed'}`}>
-              <p>
-                The idea of doing just <em>one thing</em> for several years can feel terrifying. But the truth is, during a PhD, I'll be doing <em>many</em> things I can't even predict yet.
-              </p>
-              <p>
-                I envision my PhD within a structured work schedule—for the sake of both my sanity and my productivity. Doing a PhD doesn't mean becoming a slave to academia or giving up on the rest of my life. I wouldn't do that in any other job either.
-              </p>
-              <p>
-                In fact, having a long-term project like this offers a certain kind of stability. For the duration of the PhD, I won't have to constantly worry about moving, switching jobs, or chasing the next opportunity. That <em>freedom from uncertainty</em> will help me focus—not just on the research, but on building a life around it.
-              </p>
-              <p>
-                In a way, I'm not narrowing my life—I'm grounding it, so I can go deeper.
-              </p>
-            </div>
-          </div>
-
-
+          ))}
         </div>
       </main>
 
